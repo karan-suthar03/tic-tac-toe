@@ -13,11 +13,12 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 const playerRef = database.ref('player');
 var playerData;
-var matrix;
+var matrix = [[0,0,0],[0,0,0],[0,0,0]];
 playerRef.on('value', (snapshot) => {
     playerData = snapshot.val();
 });
 const matrixRef = database.ref('matrix');
+matrixRef.set(matrix);
 matrixRef.on('value', (snapshot) => {
     matrix = snapshot.val();
 });

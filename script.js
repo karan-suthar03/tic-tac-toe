@@ -17,22 +17,27 @@ function drawX(i,j){
     line(i*gap+gap/2-45,j*gap+gap/2-45,i*gap+gap/2+45,j*gap+gap/2+45);
     line(i*gap+gap/2+45,j*gap+gap/2-45,i*gap+gap/2-45,j*gap+gap/2+45);
 }
-function drawY(){
+function drawO(i,j){
     stroke(0,0,255);
     fill(0,0);
     circle(i*gap+gap/2,j*gap+gap/2,90);
 }
 function drawOX(){
-    for(i = 0;i<3;i++){
-        for(j = 0;j<3;j++){
-            if(matrix[i][j] == 1){
-                drawX(i,j);
-            }else if(matrix[i][j] == 2){
-                drawY(i,j);
+    if (matrix) {
+        for (let i = 0; i < 3; i++) {
+            if (matrix[i]) {
+                for (let j = 0; j < 3; j++) {
+                    if (matrix[i][j] == 1) {
+                        drawX(i, j);
+                    } else if (matrix[i][j] == 2) {
+                        drawO(i, j);
+                    }
+                }
             }
         }
     }
 }
+
 function playerControll(){
     if (mouseIsPressed) {
         if(playerData == P){
@@ -40,6 +45,7 @@ function playerControll(){
             var j = parseInt(mouseY/gap);
             if(i>=0 && i<=2 && matrix[i][j] == 0 && j>=0 && j<=2){
                 matrix[i][j] = P;
+                playerRef.set(1);
             }
             matrixRef.set(matrix);
         }
